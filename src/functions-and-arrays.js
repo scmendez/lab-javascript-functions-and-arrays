@@ -44,6 +44,33 @@ const sumNumbers = (array) => {
 }
 console.log(sumNumbers(numbers));
 
+// Bonus - Iteration #3.1: A generic sum() function
+const mixedArr = [6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10];
+
+const sum = (array) => {
+  let sum = 0;
+
+  if (!array.length) return 0;
+
+  else {
+    for (let i = 0; i < array.length; i++) {
+      if (typeof array[i] === "number") {
+        sum += array[i];
+      } else if (typeof array[i] === "string") {
+        sum += array[i].length;
+      } else if (typeof array[i] === "boolean") {
+        sum += array[i];
+      } else {
+        throw new Error("Unsupported data type sir or ma'am");
+      }
+    }
+  }
+
+  return sum;
+}
+
+console.log(sum(mixedArr));
+
 // Iteration #4: Calculate the average
 // Level 1: Array of numbers
 const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
@@ -61,6 +88,17 @@ const averageNumbers = (array) => {
 }
 console.log(averageNumbers(numbersAvg));
 console.log(averageNumbers(''));
+
+//Bonus - Iteration #4.1: A generic avg() function
+const avg = (array) => {
+  if (!array.length) {
+    return null;
+  } else {
+    return Number((sum(array) / array.length).toFixed(2));
+  }
+}
+console.log(avg(mixedArr));
+
 
 // Level 2: Array of strings
 const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smart', 'chaos', 'fuel', 'palace'];
@@ -94,11 +132,18 @@ const wordsUnique = [
   'bring'
 ];
 const uniquifyArray = (array) => {
-  if (array.length) {
-    let uniqueSet = new Set(array);
-    return uniqueSet;
-  } else if (!array.length) {
+  const uniqueSet = [];
+
+  if (!array.length) {
     return null;
+  } else {
+    for (let i = 0; i < array.length; i++) {
+      let word = array[i];
+      if (!uniqueSet.includes(word)) {
+        uniqueSet.push(word);
+      }
+    }
+    return uniqueSet;
   }
 }
 console.log(uniquifyArray(wordsUnique));
